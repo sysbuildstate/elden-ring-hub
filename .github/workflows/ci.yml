@@ -22,7 +22,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: rm package-lock.json && npm install
 
       - name: Build API
         run: npm run build --workspace=api
