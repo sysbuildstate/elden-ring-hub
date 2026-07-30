@@ -1,0 +1,13 @@
+{
+  "name": "elden-ring-hub",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "api",
+    "client"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
+  }
+}
