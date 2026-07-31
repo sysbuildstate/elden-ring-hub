@@ -1,0 +1,33 @@
+### 1. Login to get a fresh token (WebStorm will save it automatically)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "tarnished@erdtree.com",
+  "password": "super_secret_password"
+}
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+    client.log("Token saved successfully!");
+%}
+
+###
+
+### 2. Create a new Weapon (Protected - Requires Token)
+POST http://localhost:3000/equipment
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "name": "Dark Moon Greatsword",
+  "type": "Greatsword",
+  "description": "A Moon Greatsword, bestowed by a Carian queen upon her spouse to honor long-standing tradition.",
+  "scaling": "Str D, Dex D, Int B",
+  "weight": 10.0
+}
+
+###
+
+### 3. Get all Equipment (Public - No Token Required)
+GET http://localhost:3000/equipment

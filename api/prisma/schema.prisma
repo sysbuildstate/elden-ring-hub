@@ -10,44 +10,18 @@ model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
-  role      Role     @default(USER)
-  builds    Build[]
+  role      String   @default("USER")
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Equipment {
-  id           String  @id @default(uuid())
-  name         String  @unique
-  type         String
-  baseDamage   Int
-  strScaling   Float
-  dexScaling   Float
-  intScaling   Float
-  faiScaling   Float
-  arcScaling   Float
-  builds       Build[]
-}
-
-model Build {
-  id            String    @id @default(uuid())
-  name          String
-  userId        String
-  user          User      @relation(fields: [userId], references: [id])
-  equipmentId   String
-  equipment     Equipment @relation(fields: [equipmentId], references: [id])
-  vigor         Int       @default(10)
-  mind          Int       @default(10)
-  endurance     Int       @default(10)
-  strength      Int       @default(10)
-  dexterity     Int       @default(10)
-  intelligence  Int       @default(10)
-  faith         Int       @default(10)
-  arcane        Int       @default(10)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
-
-enum Role {
-  USER
-  ADMIN
+  id          String   @id @default(uuid())
+  name        String   @unique
+  type        String   // e.g., "Weapon", "Armor", "Talisman"
+  description String?
+  scaling     String?  // e.g., "Str B, Dex C"
+  weight      Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

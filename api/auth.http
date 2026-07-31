@@ -1,0 +1,30 @@
+### Register a new user
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "tarnished@erdtree.com",
+  "password": "super_secret_password"
+}
+
+###
+
+### Login with the same user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "tarnished@erdtree.com",
+  "password": "super_secret_password"
+}
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+    client.log("Token saved successfully!");
+%}
+
+###
+
+### Test a protected route (we will build this later)
+GET http://localhost:3000/equipment
+Authorization: Bearer {{auth_token}}
