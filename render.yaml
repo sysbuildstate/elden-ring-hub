@@ -1,11 +1,11 @@
-# Render Infrastructure Configuration
 services:
   - type: web
     name: elden-ring-hub-api
     env: node
     plan: free
-    buildCommand: cd api && npm install && npm run build
-    startCommand: cd api && npm run start:prod
+    rootDir: api
+    buildCommand: npm install && npm run build
+    startCommand: npx prisma migrate deploy && npm run start:prod
     envVars:
       - key: DATABASE_URL
         fromDatabase:
